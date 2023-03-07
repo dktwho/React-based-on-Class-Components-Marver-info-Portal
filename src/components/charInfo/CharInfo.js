@@ -78,11 +78,16 @@ onError = () => {
 }
 
 const View = ({char}) => {
-  const {name, description, thumbnail, wiki, homepage, comics} = char
+  const {name, description, thumbnail, wiki, homepage, comics} = char;
+  let imgStyle = {'objectFit' : 'cover'};
+    if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+        imgStyle = {'objectFit' : 'contain'};
+    }
+
   return (
     <>
       <div className="char__basics">
-        <img src={thumbnail} alt="abyss"/>
+        <img src={thumbnail} alt="abyss" style={imgStyle} />
           <div>
               <div className="char__info-name">{name}</div>
               <div className="char__btns">
@@ -100,7 +105,9 @@ const View = ({char}) => {
             </div>
             <div className="char__comics">Comics:</div>
             <ul className="char__comics-list">
+              {comics.length > 0 ? null : 'There is no comics with this character'}
               {comics.map((item, i) => {
+                if(i > 9) return;
                 return (
                   <li key={i} 
                       className="char__comics-item">
