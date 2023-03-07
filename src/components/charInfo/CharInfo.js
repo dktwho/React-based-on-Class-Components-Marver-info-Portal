@@ -66,8 +66,6 @@ onError = () => {
       const spinner = loading ? <Spinner/> : null;
       const content = !(loading || error || !char ) ? <View char={char}/> : null;
 
-
-
       return (
         <div className="char__info">
             {skeleton}
