@@ -70,9 +70,6 @@ class CharList extends Component {
     this.itemRefs[id].focus();
 }
 
-
-
-
     renderItems(arr) {
         const items =  arr.map((item, i) => {
             let imgStyle = {'objectFit' : 'cover'};
