@@ -12,7 +12,7 @@ const CharList = (props) =>  {
   const [charEnded, setCharEnded] = useState(false)
 
     
-    const marvelService =  useMarvelService();
+    const {loading, error, getAllCharacters } =  useMarvelService();
 
     useEffect(() => {
       onRequest()
@@ -20,16 +20,12 @@ const CharList = (props) =>  {
    
 
    const onRequest = (offset) => {
-         onCharListLoading();
-         marvelService.getAllCharacters(offset)
+    setNewItemLoading(true)
+          getAllCharacters(offset)
           .then(onCharListLoaded)
-          .catch(onError)
-
     }
 
-    const onCharListLoading = () => {
-          setNewItemLoading(true)
-    }
+
 
     const onCharListLoaded = (newCharList) => {
       let ended = false;
@@ -37,16 +33,11 @@ const CharList = (props) =>  {
         ended = true
       }
         setCharList(charList => [...charList, ...newCharList ])
-        setLoading(loading => false)
         setNewItemLoading(newItemLoading => false)
         setOffset(offset => offset + 9 )
         setCharEnded(charEnded => ended)
     }
 
-    const onError = () => {
-          setError(true)
-          setLoading(false)
-    }
 
     const itemRefs = useRef([]);
 
