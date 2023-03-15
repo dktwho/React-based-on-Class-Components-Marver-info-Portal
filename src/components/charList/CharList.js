@@ -11,21 +11,17 @@ const CharList = (props) =>  {
   const [offset, setOffset] = useState(210)
   const [charEnded, setCharEnded] = useState(false)
 
-    
     const {loading, error, getAllCharacters } =  useMarvelService();
 
     useEffect(() => {
       onRequest(offset, true)
     }, [])
    
-
    const onRequest = (offset, initial) => {
     initial ?  setNewItemLoading(false) :  setNewItemLoading(true)
         getAllCharacters(offset)
         .then(onCharListLoaded)
     }
-
-
 
     const onCharListLoaded = (newCharList) => {
       let ended = false;
@@ -96,7 +92,6 @@ const CharList = (props) =>  {
                 </button>
             </div>
         )
- 
 }
 
 CharList.propTypes = {

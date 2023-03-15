@@ -9,44 +9,38 @@ import Skeleton from '../skeleton/Skeleton'
 const  CharInfo = (props) => {
   const [char, setChar] = useState(null)
 
-
-
 const {loading, error, getCharacter, clearError} =  useMarvelService();
 
 useEffect(() => {
   updateChar()
 }, [props.charId])
 
-
-
 const updateChar = () => {
   const {charId} = props
   if(!charId) {
     return;
   }
-      clearError()
-      getCharacter(charId)
-      .then(onCharLoaded)
-
+    clearError()
+    getCharacter(charId)
+    .then(onCharLoaded)
 }
 
 const onCharLoaded = (char) => {
   setChar(char)
 }
-
     const skeleton =  char || loading || error  ? null : <Skeleton/>
     const errorMessage = error ? <ErrorMessage/> : null;
     const spinner = loading ? <Spinner/> : null;
     const content = !(loading || error || !char ) ? <View char={char}/> : null;
 
-    return (
-      <div className="char__info">
-          {skeleton}
-          {errorMessage}
-          {spinner}
-          {content}
-      </div>
-  )
+  return (
+    <div className="char__info">
+        {skeleton}
+        {errorMessage}
+        {spinner}
+        {content}
+    </div>
+)
 }
 
 const View = ({char}) => {
